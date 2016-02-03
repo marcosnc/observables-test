@@ -13,6 +13,15 @@ import rx.Observable;
 
 public class Test_02_SeeYourself {
 
+
+
+
+
+
+    //----------------------------------------------------------------------
+    //--- Auto Introspection -----------------------------------------------
+    //----------------------------------------------------------------------
+
     @Test
     public void inspectObservablesApi() {
         System.out.println("\n\nRxJava operators:");
@@ -22,7 +31,15 @@ public class Test_02_SeeYourself {
                 .map(Method::getName)
                 .distinct()
                 .toSortedList()
-                .forEach(System.out::println);
-                //.subscribe(list -> list.forEach(System.out::println));
+                .subscribe(list -> list.forEach(System.out::println));
     }
+
+    //----------------------------------------------------------------------
+    //----------------------------------------------------------------------
+
+
+
+
+
+
 }

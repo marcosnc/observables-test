@@ -79,11 +79,11 @@ public class Test_01_Simple {
     @Test
     public void transformMap() {
 
-        Observable<String> someObservable = receiveEvents();
+        Observable<String> words = receiveEvents();
 
         // Take the length for each word
         Observable<Integer> wordLength =
-                someObservable
+                words
                     .map(word -> word.length());
         wordLength.subscribe(System.out::println);
 
@@ -98,6 +98,41 @@ public class Test_01_Simple {
 
     //----------------------------------------------------------------------
     //----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //----------------------------------------------------------------------
+    //--- Combining: ZIP ---------------------------------------------------
+    //----------------------------------------------------------------------
+
+    @Test
+    public void combiningZip() {
+
+        Observable<String>  words   = receiveEvents();
+        Observable<Integer> lengths = words.map(word -> word.length());
+
+        words
+           .zipWith(lengths,
+                    (word, count) -> String.format("%d: %s", count, word))
+           .subscribe(System.out::println);
+
+    }
+
+    //----------------------------------------------------------------------
+    //----------------------------------------------------------------------
+
+
 
 
 
@@ -162,41 +197,6 @@ public class Test_01_Simple {
 
         someObservable
                 .filter(item -> item.startsWith("M"))
-                .subscribe(System.out::println);
-
-    }
-
-    //----------------------------------------------------------------------
-    //----------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //----------------------------------------------------------------------
-    //--- Combining: ZIP ---------------------------------------------------
-    //----------------------------------------------------------------------
-
-    @Test
-    public void combiningZip() {
-
-        Observable<String>  someObservable = receiveEvents();
-        Observable<Integer> lettersCount   = someObservable.map(word -> word.length());
-
-        someObservable
-                .zipWith(lettersCount,
-                         (word, count) -> String.format("%d: %s", count, word))
                 .subscribe(System.out::println);
 
     }
